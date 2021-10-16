@@ -1,51 +1,34 @@
-import React from 'react';
-import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
+import React, { useState, useEffect } from 'react';
 import './App.global.css';
 
-const Hello = () => {
+import assets from '../assets';
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let counter = count;
+    const interval = () => {
+      if (count >= assets.length - 1) {
+        setCount(0);
+      } else {
+        counter += 1;
+        setCount(counter);
+      }
+    };
+
+    setTimeout(interval, assets[count].length + 500);
+  }, [count]);
+
   return (
     <div>
-      <div className="Hello">
-        <img width="200px" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
+      {assets[count].type === 'video' ? (
+        <video src={assets[count].media} muted autoPlay />
+      ) : (
+        <img src={assets[count].media} alt="media" />
+      )}
     </div>
   );
 };
 
-export default function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Hello} />
-      </Switch>
-    </Router>
-  );
-}
+export default App;
