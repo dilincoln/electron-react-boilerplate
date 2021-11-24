@@ -21,7 +21,7 @@ const App = () => {
   }, [count]);
 
   return (
-    <div>
+    <div className="slideContent">
       {assets[count].type === 'video' ? (
         <video src={assets[count].media} muted autoPlay />
       ) : (
