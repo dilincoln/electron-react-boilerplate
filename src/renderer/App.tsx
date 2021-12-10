@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.global.css';
+import './App.css';
 
 import assets from '../assets';
 
